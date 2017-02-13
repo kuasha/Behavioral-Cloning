@@ -14,6 +14,10 @@ from keras.layers.convolutional import Convolution2D
 from keras.layers.pooling import MaxPooling2D
 
 def get_model():
+    """
+    Used the NVIDIA neural network
+    """
+    
     model = Sequential()
     # normalize
     model.add(Lambda(lambda x: x / 255.0 - 0.5, input_shape=(160,320,3)))
