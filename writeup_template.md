@@ -96,42 +96,28 @@ I have uploaded a 10 minute video of the model driving here- https://www.youtube
 
 The final model architecture (model.py lines 16-46) consisted of a convolution neural network with the following layers and layer sizes:
 
-Layer (type)                     Output Shape          Param #     Connected to                     
-====================================================================================================
-lambda_1 (Lambda)                (None, 160, 320, 3)   0           lambda_input_1[0][0]             
-____________________________________________________________________________________________________
-cropping2d_1 (Cropping2D)        (None, 65, 320, 3)    0           lambda_1[0][0]                   
-____________________________________________________________________________________________________
-convolution2d_1 (Convolution2D)  (None, 61, 316, 24)   1824        cropping2d_1[0][0]               
-____________________________________________________________________________________________________
-maxpooling2d_1 (MaxPooling2D)    (None, 30, 158, 24)   0           convolution2d_1[0][0]            
-____________________________________________________________________________________________________
-convolution2d_2 (Convolution2D)  (None, 26, 154, 36)   21636       maxpooling2d_1[0][0]             
-____________________________________________________________________________________________________
-convolution2d_3 (Convolution2D)  (None, 22, 150, 48)   43248       convolution2d_2[0][0]            
-____________________________________________________________________________________________________
-convolution2d_4 (Convolution2D)  (None, 20, 148, 64)   27712       convolution2d_3[0][0]            
-____________________________________________________________________________________________________
-convolution2d_5 (Convolution2D)  (None, 18, 146, 64)   36928       convolution2d_4[0][0]            
-____________________________________________________________________________________________________
-flatten_1 (Flatten)              (None, 168192)        0           convolution2d_5[0][0]            
-____________________________________________________________________________________________________
-dropout_1 (Dropout)              (None, 168192)        0           flatten_1[0][0]                  
-____________________________________________________________________________________________________
-dense_1 (Dense)                  (None, 256)           43057408    dropout_1[0][0]                  
-____________________________________________________________________________________________________
-dense_2 (Dense)                  (None, 100)           25700       dense_1[0][0]                    
-____________________________________________________________________________________________________
-dense_3 (Dense)                  (None, 50)            5050        dense_2[0][0]                    
-____________________________________________________________________________________________________
-dense_4 (Dense)                  (None, 10)            510         dense_3[0][0]                    
-____________________________________________________________________________________________________
-dense_5 (Dense)                  (None, 1)             11          dense_4[0][0]                    
-====================================================================================================
-Total params: 43,220,027
-Trainable params: 43,220,027
-Non-trainable params: 0
+Input shape: (160, 320, 3)
 
+Normalization layer: Output shape: 160, 320, 3
+Cropping layer: Output shape (65, 320, 3)
+Convolution layer (5x5): Output shape (61, 316, 24)
+MaxPool layer (2x2): Output shape (30, 158, 24)
+Convolution layer (5x5): Output shape (26, 154, 36)
+Convolution layer (5x5): Output shape (22, 150, 48)
+Convolution layer (3x3): Output shape (20, 148, 64)
+Convolution layer (3x3): Output shape (18, 146, 64)
+
+Flatten layer: Output shape (168192)
+Dropout : Output shape (168192)
+
+Fully connected : Output shape (256)
+Fully connected : Output shape (100)
+Fully connected : Output shape (50)
+Fully connected : Output shape (10)
+
+Output layer: shape (1)
+
+Total trainable params: 43,220,027
 
 Here is a visualization of the architecture (without max-pooling and dropout layer)
 
