@@ -114,7 +114,7 @@ The final model architecture (model.py lines 16-46) consisted of a convolution n
 
 Total trainable params: 43,220,027
 
-Here is a visualization of the architecture (without max-pooling and dropout layer)
+Here is a visualization of the architecture (without max-pooling and dropout layer and taken from NVIDIA paper)
 
 ![Model architectire] [image_arch]
 
