@@ -68,9 +68,7 @@ The model used an adam optimizer, so the learning rate was not tuned manually (m
 
 ####4. Appropriate training data
 
-Training data was chosen to keep the vehicle driving on the road. I have built a 
-
-For details about how I created the training data, see the next section. 
+Training data was chosen to keep the vehicle driving on the road. For details about how I created the training data, see the next section. 
 
 ###Model Architecture and Training Strategy
 
@@ -122,7 +120,7 @@ Here is a visualization of the architecture (without max-pooling and dropout lay
 
 ####3. Creation of the Training Set & Training Process
 
-To collect data I have created a simple hardware using an old stepper motor. I have removed all the circuitry from the motor keeping the gear mechanism and the potentiometer. I have then connected the potentiomenet to an arduino and used the drive.py to collect the input data. Here is the details of the steering hardware http://www.copotron.com/2017/01/driving-udacity-car-simulator-with-home.html . With this I was able to collect a lot of data. 
+To collect data I have created a simple hardware using an old stepper motor. I have removed all the circuitry from the motor keeping the gear mechanism and the potentiometer. I have then connected the potentiomenet to an arduino and used the drive.py to collect the input data. Here is the details of the steering hardware http://www.copotron.com/2017/01/driving-udacity-car-simulator-with-home.html. With this I was able to collect a lot of data. 
 
 To start I have taken the data.zip file provided with the assignment. Initially I used only the center lane. Here is an example image of center lane driving:
 
@@ -144,5 +142,7 @@ After the collection process, I had 48216 number of data points.
 I finally randomly shuffled the data set and put 20% of the data into a validation set. 
 
 I used this training data for training the model. The validation set helped determine if the model was over or under fitting. I started with 3 epochs that would crash in few seconds. The ideal number of epochs was 20 as the model could drive perfectly for more than 8 hours running overnight.
+
+At the end I have only used the images from data.zip since I found that the car could be driven without any problem after using only that set.
 
 I used an adam optimizer so that manually training the learning rate wasn't necessary.
