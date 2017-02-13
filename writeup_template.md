@@ -135,8 +135,8 @@ The data file contains many different positions. I have taken the left and right
 
 To augment the data sat, I also flipped images and angles that gives me image with similar angle but taken from mirrored lane. For example, here is an image that has then been flipped:
 
-![alt text][image_center_lane]
-![alt text][image_center_lane_flipped]
+![Original image][image_center_lane]
+![Flipped image][image_center_lane_flipped]
 
 
 After the collection process, I had 48216 number of data points.
