@@ -16,13 +16,10 @@ The goals / steps of this project are the following:
 
 [image_arch]: ./images/arch.jpg "Model Architecture"
 [image_sthw]: ./images/steering.jpg "Steering hardware"
-[image1]: ./examples/placeholder.png "Model Visualization"
-[image2]: ./examples/placeholder.png "Grayscaling"
-[image3]: ./examples/placeholder_small.png "Recovery Image"
-[image4]: ./examples/placeholder_small.png "Recovery Image"
-[image5]: ./examples/placeholder_small.png "Recovery Image"
-[image6]: ./examples/placeholder_small.png "Normal Image"
-[image7]: ./examples/placeholder_small.png "Flipped Image"
+[image_center_lane]: ./examples/placeholder.png "Center lane image"
+[image_center_lane_flipped] ./examples/placeholder.png "Flipped image"
+[image_left_cam]: ./examples/placeholder.png "Grayscaling"
+[image_right_cam]: ./examples/placeholder.png "Grayscaling"
 
 ---
 ###Files Submitted & Code Quality
@@ -96,26 +93,26 @@ I have uploaded a 10 minute video of the model driving here- https://www.youtube
 
 The final model architecture (model.py lines 16-46) consisted of a convolution neural network with the following layers and layer sizes:
 
-Input shape: (160, 320, 3)
+- Input shape: (160, 320, 3)
 
-Normalization layer: Output shape: 160, 320, 3
-Cropping layer: Output shape (65, 320, 3)
-Convolution layer (5x5): Output shape (61, 316, 24)
-MaxPool layer (2x2): Output shape (30, 158, 24)
-Convolution layer (5x5): Output shape (26, 154, 36)
-Convolution layer (5x5): Output shape (22, 150, 48)
-Convolution layer (3x3): Output shape (20, 148, 64)
-Convolution layer (3x3): Output shape (18, 146, 64)
+- Normalization layer: Output shape: 160, 320, 3
+- Cropping layer: Output shape (65, 320, 3)
+- Convolution layer (5x5): Output shape (61, 316, 24)
+- MaxPool layer (2x2): Output shape (30, 158, 24)
+- Convolution layer (5x5): Output shape (26, 154, 36)
+- Convolution layer (5x5): Output shape (22, 150, 48)
+- Convolution layer (3x3): Output shape (20, 148, 64)
+- Convolution layer (3x3): Output shape (18, 146, 64)
 
-Flatten layer: Output shape (168192)
-Dropout : Output shape (168192)
+- Flatten layer: Output shape (168192)
+- Dropout : Output shape (168192)
 
-Fully connected : Output shape (256)
-Fully connected : Output shape (100)
-Fully connected : Output shape (50)
-Fully connected : Output shape (10)
+- Fully connected : Output shape (256)
+- Fully connected : Output shape (100)
+- Fully connected : Output shape (50)
+- Fully connected : Output shape (10)
 
-Output layer: shape (1)
+- Output layer: shape (1)
 
 Total trainable params: 43,220,027
 
@@ -125,28 +122,27 @@ Here is a visualization of the architecture (without max-pooling and dropout lay
 
 ####3. Creation of the Training Set & Training Process
 
-To capture good driving behavior, I first recorded two laps on track one using center lane driving. Here is an example image of center lane driving:
+To collect data I have created a simple hardware using an old stepper motor. I have removed all the circuitry from the motor keeping the gear mechanism and the potentiometer. I have then connected the potentiomenet to an arduino and used the drive.py to collect the input data. Here is the details of the steering hardware http://www.copotron.com/2017/01/driving-udacity-car-simulator-with-home.html . With this I was able to collect a lot of data. 
 
-![alt text][image2]
+To start I have taken the data.zip file provided with the assignment. Initially I used only the center lane. Here is an example image of center lane driving:
 
-I then recorded the vehicle recovering from the left side and right sides of the road back to center so that the vehicle would learn to .... These images show what a recovery looks like starting from ... :
+![Center lane data][image_center_lane]
 
-![alt text][image3]
-![alt text][image4]
-![alt text][image5]
+The data file contains many different positions. I have taken the left and right images with a steering correction value of 0.2. Correction value is added to to steering value to get left image steering value and subtracted to get right image steering value. 
 
-Then I repeated this process on track two in order to get more data points.
+![Left camera][image_left_cam]
+![Right camera][image_right_cam]
 
-To augment the data sat, I also flipped images and angles thinking that this would ... For example, here is an image that has then been flipped:
+To augment the data sat, I also flipped images and angles that gives me image with similar angle but taken from mirrored lane. For example, here is an image that has then been flipped:
 
-![alt text][image6]
-![alt text][image7]
-
-Etc ....
-
-After the collection process, I had X number of data points. I then preprocessed this data by ...
+![alt text][image_center_lane]
+![alt text][image_center_lane_flipped]
 
 
-I finally randomly shuffled the data set and put Y% of the data into a validation set. 
+After the collection process, I had 48216 number of data points.
 
-I used this training data for training the model. The validation set helped determine if the model was over or under fitting. The ideal number of epochs was Z as evidenced by ... I used an adam optimizer so that manually training the learning rate wasn't necessary.
+I finally randomly shuffled the data set and put 20% of the data into a validation set. 
+
+I used this training data for training the model. The validation set helped determine if the model was over or under fitting. I started with 3 epochs that would crash in few seconds. The ideal number of epochs was 20 as the model could drive perfectly for more than 8 hours running overnight.
+
+I used an adam optimizer so that manually training the learning rate wasn't necessary.
