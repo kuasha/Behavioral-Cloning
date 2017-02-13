@@ -15,7 +15,11 @@ from keras.layers.pooling import MaxPooling2D
 
 def get_model():
     model = Sequential()
+    # normalize
     model.add(Lambda(lambda x: x / 255.0 - 0.5, input_shape=(160,320,3)))
+    
+    # remove top and bottom portion of image - the sky and car front - 
+    # is not useful for drifing the car
     model.add(Cropping2D(cropping=((70,25),(0,0))))
 
     model.add(Convolution2D(24, 5, 5, activation='relu'))
@@ -38,6 +42,11 @@ def get_model():
     return model
 
 def load_dataset():
+    """
+    We load all image locations and their corresponding steering angles.
+    For left image we add 0.2 and for right image we subtract 0.2 from the 
+    steering angle to compensate. We shuffle the list at the end.
+    """
     osamples = []
     with open('./data/driving_log.csv') as csvfile:
         reader = csv.reader(csvfile)
@@ -51,8 +60,8 @@ def load_dataset():
     for sample in osamples[1:]:
         measurement = float(sample[3])
         samples.append([sample[0], measurement])
-        samples.append([sample[1], measurement + correction])
-        samples.append([sample[2], measurement - correction])
+        samples.append([sample[1], measurement + correction]) #left image
+        samples.append([sample[2], measurement - correction]) #right image
 
     #print(len(samples))
     #print(samples[0])
@@ -63,17 +72,24 @@ def load_dataset():
     return samples
 
 def generator(data,batch_size=32):
+    """
+    Batch generator creates a generator that sends batch_size amount of images 
+    to the caller in each batch. We flip each image to make the dataset bigger.
+    
+    """
+    
     batch_size = int(batch_size /2)
     num_samples = len(data)
     while 1: # Used as a reference pointer so code always loops back around
         shuffle(data)
         for offset in range(0, num_samples, batch_size):
             batch_samples = data[offset:offset+batch_size]
-            print(offset)
+            #print(offset)
             
             images = []
             angles = []
-            print(batch_samples)
+            #print(batch_samples)
+            #Add original image and flipped image with steering angle reversed
             for batch_sample in batch_samples:
                 angle = float(batch_sample[1])
                 name = './data/IMG/'+batch_sample[0].split('/')[-1]
