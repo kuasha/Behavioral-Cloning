@@ -1,0 +1,3 @@
+The files in this folder was created using:
+split --bytes=20M model.h5 modelh5
+
