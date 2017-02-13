@@ -16,10 +16,10 @@ The goals / steps of this project are the following:
 
 [image_arch]: ./images/arch.jpg "Model Architecture"
 [image_sthw]: ./images/steering.jpg "Steering hardware"
-[image_center_lane]: ./examples/placeholder.png "Center lane image"
-[image_center_lane_flipped]: ./examples/placeholder.png "Flipped image"
-[image_left_cam]: ./examples/placeholder.png "Grayscaling"
-[image_right_cam]: ./examples/placeholder.png "Grayscaling"
+[image_center_lane]: ./images/center.jpg "Center lane image"
+[image_center_lane_flipped]: ./images/centerflipped.jpg "Flipped image"
+[image_left_cam]: ./images/left.jpg "Left camera image"
+[image_right_cam]: ./images/right.jpg "Right camera image"
 
 ---
 ###Files Submitted & Code Quality
